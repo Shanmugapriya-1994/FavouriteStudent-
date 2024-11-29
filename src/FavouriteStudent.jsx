@@ -1,19 +1,21 @@
 import { Link } from "react-router-dom";
 import { NameContext } from "./NameContext";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 function FavouriteStudent() {
     const { favstudent, setfavstudent } = useContext(NameContext);
     const {namelist,setnamelist} = useContext(NameContext);
-    const {isdisabled,setisdisabled} = useContext(NameContext)
+    const {setisdisabled} = useContext(NameContext)
      
     function handleRemove(deletename) {
         setisdisabled((selectname) => ({
             ...selectname,
             [deletename]: false,
           }));
+          setnamelist([...namelist])
+
         var remainname = favstudent.filter(function (item) {
-            console.log(deletename)
+           
             if (item === deletename) {
                return false               
             } 
@@ -22,7 +24,7 @@ function FavouriteStudent() {
             }
          })
         setfavstudent(remainname)
-        setnamelist([...namelist,deletename])
+       
 
     }
 
